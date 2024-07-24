@@ -1,0 +1,164 @@
+-- | LOAD | --
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "CoCo's Hub v1 | 🔫 mm2 🔪",
+    LoadingTitle = "CoCo's Hub v1 | 🔫 mm2 🔪",
+    LoadingSubtitle = "by CoConut_Man | @coconutman_",
+    ConfigurationSaving = {
+       Enabled = true,
+       FolderName = nil, -- Create a custom folder for your hub/game
+       FileName = "CoCo's Hub"
+    },
+    Discord = {
+       Enabled = true,
+       Invite = "h4hPYzAJqB", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+       RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+    },
+    KeySystem = false, -- Set this to true to use our key system
+    KeySettings = {
+       Title = "Access to hub",
+       Subtitle = "Key System",
+       Note = "Go to this link to get the key : Join The Discord",
+       FileName = "CoCo's Key System 1 mm2", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+       SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+       GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+       Key = {"https://pastebin.com/raw/KA3FYDzY"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+    }
+ })
+-- | CREAT MAINTAB / MAINSECTIONS | --
+local MainTab = Window:CreateTab("🏠 Home", nil) -- Title, Image
+local MainSection = MainTab:CreateSection("Main")
+-- | NOTIFY LOADED |--
+
+Rayfield:Notify({
+    Title = "Hub Loaded",
+    Content = "The Hub have loaded, if there are any bugs, pls join the discord",
+    Duration = 6.5,
+    Image = 4483362458,
+    Actions = { -- Notification Buttons
+       Ignore = {
+          Name = "Okay!",
+          Callback = function()
+          print("Notification Closed")
+       end
+    },
+ },
+ })
+
+-- | CREATE BUTTONS / SLIDER | --
+
+local Label = MainTab:CreateLabel("Thank You For Using CoCo's Hub, you are curently on the v1")
+
+local Button = MainTab:CreateButton({
+    Name = "🟩 ESP",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Ihaveash0rtnamefordiscord/Releases/main/MurderMystery2HighlightESP"))(' Watermelon ?')
+    end,
+ })
+
+ -- | CREAT PLAYER STUFF | --
+ local PlayerTab = Window:CreateTab("🚶 Player", nil)
+ local PhysicSection = PlayerTab:CreateSection("Physics")
+
+ local Button = MainTab:CreateButton({
+    Name = "🧱 Noclip",
+    Callback = function()
+        local Noclip = nil
+local Clip = nil
+
+function noclip()
+	Clip = false
+	local function Nocl()
+		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+			for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+				if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+					v.CanCollide = false
+				end
+			end
+		end
+		wait(0.21) -- basic optimization
+	end
+	Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+end
+
+function clip()
+	if Noclip then Noclip:Disconnect() end
+	Clip = true
+end
+
+noclip() -- to toggle noclip() and clip()
+    end,
+ })
+
+ local Slider = PlayerTab:CreateSlider({
+    Name = "👟 WalkSpeed",
+    Range = {16, 300},
+    Increment = 1,
+    Suffix = "Speed",
+    CurrentValue = 16,
+    Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value)
+    end,
+ })
+
+ local Slider = PlayerTab:CreateSlider({
+    Name = "🦘 JumpPower",
+    Range = {16, 300},
+    Increment = 1,
+    Suffix = "Speed",
+    CurrentValue = 16,
+    Flag = "Slider2", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = (Value)
+    end,
+ })
+
+ local Toggle = PlayerTab:CreateToggle({
+    Name = "➡️ Ctrl + Click To Tp",
+    CurrentValue = false,
+    Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        local UIS = game:GetService("UserInputService")
+
+local Player = game.Players.LocalPlayer
+local Mouse = Player:GetMouse()
+
+
+function GetCharacter()
+   return game.Players.LocalPlayer.Character
+end
+
+function Teleport(pos)
+   local Char = GetCharacter()
+   if Char then
+       Char:MoveTo(pos)
+   end
+end
+
+
+UIS.InputBegan:Connect(function(input)
+   if input.UserInputType == Enum.UserInputType.MouseButton1 and UIS:IsKeyDown(Enum.KeyCode.LeftControl) then
+       Teleport(Mouse.Hit.p)
+   end
+end)
+    end,
+ })
+
+ local Button = PlayerTab:CreateButton({
+   Name = "🦅 Fly",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+   end,
+})
+
+ -- | Troll Category | --
+ local TrollTab = Window:CreateTab("Troll", 7120897394) -- Title, Image
+
+ local Button = TrollTab:CreateButton({
+    Name = " 💥 Fling Gui",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/Fling%20GUI"))()
+    end,
+ })
